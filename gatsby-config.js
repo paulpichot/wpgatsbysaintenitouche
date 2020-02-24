@@ -1,38 +1,60 @@
 module.exports = {
-  siteMetadata: {
-    title: 'Gatsby + WordPress Starter',
-  },
-  plugins: [
-    'gatsby-plugin-react-helmet',
-    'gatsby-plugin-sass',
-    {
-      resolve: 'gatsby-source-wordpress',
-      options: {
-        // The base url to your WP site.
-        baseUrl: 'wpdemo.gatsbycentral.com',
-        // WP.com sites set to true, WP.org set to false
-        hostingWPCOM: false,
-        // The protocol. This can be http or https.
-        protocol: 'https',
-        // Use 'Advanced Custom Fields' Wordpress plugin
-        useACF: false,
-        auth: {},
-        // Set to true to debug endpoints on 'gatsby build'
-        verboseOutput: false,
-      },
-    },
-    'gatsby-plugin-sharp',
-    'gatsby-transformer-sharp',
-    {
-      // Removes unused css rules
-      resolve:'gatsby-plugin-purgecss',
-      options: {
-        // Activates purging in gatsby develop
-        develop: true,
-        // Purge only the main css file
-        purgeOnly: ['/all.sass'],
-      },
-    }, // must be after other CSS plugins
-    'gatsby-plugin-netlify', // make sure to keep it last in the array
-  ],
-}
+	siteMetadata: {
+		title: `WP x Gatsby x Sainte Nitouche`,
+		description: `WP x Gatsby x Sainte Nitouche`,
+		author: `Paul Pichot`,
+		wordPressUrl: `/`,
+		siteLink: `/`
+	},
+	plugins: [
+		// Setup WPGraphQL.com to be the source
+		{
+			resolve: `gatsby-source-graphql`,
+			options: {
+				// This type will contain remote schema Query type
+				typeName: `WPGraphQL`,
+				// This is field under which it's accessible
+				fieldName: `wpgraphql`,
+				// Url to query from
+				url: `https://wpgraphql.saintenitouche.studio`
+			}
+		},
+		{
+			resolve: 'gatsby-wpgraphql-inline-images',
+			options: {
+				wordPressUrl: `https://wpgraphql.saintenitouche.studio`,
+				uploadsUrl: `https://wpgraphql.saintenitouche.studio`,
+				processPostTypes: ['Page', 'Post'],
+				graphqlTypeName: `WPGraphQL`
+			}
+		},
+		`gatsby-plugin-react-helmet`,
+		{
+			resolve: `gatsby-source-filesystem`,
+			options: {
+				name: `images`,
+				path: `${__dirname}/src/images`
+			}
+		},
+		`gatsby-transformer-sharp`,
+		`gatsby-plugin-sharp`,
+		{
+			resolve: `gatsby-plugin-manifest`,
+			options: {
+				name: `gatsby-wpgraphql-starter`,
+				short_name: `starter`,
+				start_url: `/`,
+				background_color: `#f0f2f5`,
+				theme_color: `#001529`,
+				display: `minimal-ui`,
+				icon: `src/images/wpgraphql-logo.png` // This path is relative to the root of the site.
+			}
+		},
+		{
+			resolve: 'gatsby-plugin-sass'
+		}
+		// this (optional) plugin enables Progressive Web App + Offline functionality
+		// To learn more, visit: https://gatsby.app/offline
+		//`gatsby-plugin-offline`,
+	]
+};

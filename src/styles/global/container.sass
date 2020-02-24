@@ -1,0 +1,16 @@
+@import "../variables.sass"
+
+.container
+    max-width: $width-container
+
+.header-container
+    max-width: $width-header-container
+
+.plr-container
+    padding-left: $mobile-padding-container
+    padding-right: $mobile-padding-container
+
+@media only screen and (min-width: $mobile-padding-container-breakpoint)
+    .plr-container
+        padding-left: $padding-container
+        padding-right: $padding-container

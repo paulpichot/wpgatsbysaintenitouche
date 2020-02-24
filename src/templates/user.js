@@ -7,29 +7,30 @@ import { graphql } from 'gatsby';
 import PostEntry from '../components/Blog/PostEntry';
 import Meta from '../components/Header/Meta';
 
-const CategoryTemplate = (props) => {
-	const { location, data: { wpgraphql: { category } } } = props;
+const User = (props) => {
+	const { location, data: { wpgraphql: { user } } } = props;
 	return (
 		<Layout location={location}>
-			<Meta title={`${category.name}`} />
+			<Meta title={`${user.name}`} />
 
-			<h1>Category: {category.name}</h1>
-
-			{category.posts.nodes && category.posts.nodes.map((post) => <PostEntry post={post} />)}
+			<h1>{user.name}</h1>
+			<h2>Latest Posts</h2>
+			{user.posts.nodes.map((post) => <PostEntry post={post} />)}
 		</Layout>
 	);
 };
 
-export default CategoryTemplate;
+export default User;
 
 export const pageQuery = graphql`
-	query GET_CATEGORY($id: ID!) {
+	query user($id: ID!) {
 		wpgraphql {
-			category(id: $id) {
-				id
+			user(id: $id) {
 				name
-				slug
-				posts(first: 100) {
+				avatar {
+					url
+				}
+				posts {
 					nodes {
 						...PostEntryFragment
 					}

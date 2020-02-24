@@ -1,42 +1,39 @@
-import React from 'react'
-import Helmet from 'react-helmet'
-import { graphql } from 'gatsby'
-import Layout from '../components/Layout'
-import PostList from '../components/PostList'
+import React from 'react';
+import Layout from '../components/Layout';
+import { graphql } from 'gatsby';
+//import CategoriesWidget from '../components/Blog/CategoriesWidget';
+//import RecentCommentsWidget from '../components/Blog/RecentCommentsWidget';
+//import RecentPostsWidget from '../components/Blog/RecentPostsWidget';
+import PostEntry from '../components/Blog/PostEntry';
+import Meta from '../components/Header/Meta';
 
-const Tag = props => {
-  const { data, pageContext } = props
-  const { edges: posts, totalCount } = data.allWordpressPost
-  const { title: siteTitle } = data.site.siteMetadata
-  const { name: tag } = pageContext
-  const title = `${totalCount} post${
-    totalCount === 1 ? '' : 's'
-  } with the tag ${tag}`
+const TagTemplate = (props) => {
+	const { location, data: { wpgraphql: { tag } } } = props;
+	return (
+		<Layout location={location}>
+			<Meta title={`${tag.title}`} />
+			<h2>{tag.name}</h2>
 
-  return (
-    <Layout>
-      <Helmet title={`${tag} | ${siteTitle}`} />
-      <PostList posts={posts} title={title} />
-    </Layout>
-  )
-}
+			{tag.posts.nodes && tag.posts.nodes.map((post) => <PostEntry post={post} />)}
+		</Layout>
+	);
+};
 
-export default Tag
+export default TagTemplate;
 
 export const pageQuery = graphql`
-  query TagPage($slug: String!) {
-    site {
-      siteMetadata {
-        title
-      }
-    }
-    allWordpressPost(filter: { tags: { elemMatch: { slug: { eq: $slug } } } }) {
-      totalCount
-      edges {
-        node {
-          ...PostListFields
-        }
-      }
-    }
-  }
-`
+	query GET_TAG($id: ID!) {
+		wpgraphql {
+			tag(id: $id) {
+				id
+				name
+				slug
+				posts(first: 100) {
+					nodes {
+						...PostEntryFragment
+					}
+				}
+			}
+		}
+	}
+`;

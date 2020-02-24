@@ -1,56 +1,40 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { graphql } from 'gatsby'
-import Layout from '../components/Layout'
+import React from 'react';
+import { graphql } from 'gatsby';
+import Layout from '../components/Layout';
+//import CategoriesWidget from '../components/Blog/CategoriesWidget';
+//import RecentCommentsWidget from '../components/Blog/RecentCommentsWidget';
+//import RecentPostsWidget from '../components/Blog/RecentPostsWidget';
+import Meta from '../components/Header/Meta';
+import contentParser from 'gatsby-wpgraphql-inline-images';
 
-export const PageTemplate = ({ title, content }) => {
-  return (
-    <section className="section section--gradient">
-      <div className="container">
-        <div className="columns">
-          <div className="column is-10 is-offset-1">
-            <div className="section">
-              <h2 className="title is-size-3 has-text-weight-bold is-bold-light">
-                {title}
-              </h2>
-              <div
-                className="content"
-                dangerouslySetInnerHTML={{ __html: content }}
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  )
-}
+const Page = (props) => {
+	const {
+		location,
+		data: { wpgraphql: { page } },
+		pageContext: { pluginOptions: { wordPressUrl, uploadsUrl } }
+	} = props;
+	const { title, content } = page;
+	return (
+		<Layout location={location}>
+			<Meta title={`${page.title}`} />
 
-PageTemplate.propTypes = {
-  title: PropTypes.string.isRequired,
-  content: PropTypes.string,
-}
+			<h1>{title}</h1>
 
-const Page = ({ data }) => {
-  const { wordpressPage: page } = data
+			<div>{contentParser({ content }, { wordPressUrl, uploadsUrl })}</div>
+		</Layout>
+	);
+};
 
-  return (
-    <Layout>
-      <PageTemplate title={page.title} content={page.content} />
-    </Layout>
-  )
-}
-
-Page.propTypes = {
-  data: PropTypes.object.isRequired,
-}
-
-export default Page
+export default Page;
 
 export const pageQuery = graphql`
-  query PageById($id: String!) {
-    wordpressPage(id: { eq: $id }) {
-      title
-      content
-    }
-  }
-`
+	query GET_PAGE($id: ID!) {
+		wpgraphql {
+			page(id: $id) {
+				title
+				content
+				uri
+			}
+		}
+	}
+`;

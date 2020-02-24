@@ -1,0 +1,49 @@
+@import "../../variables.sass"
+
+.nav__menu
+    flex-grow: 1
+    flex-shrink: 1
+    display: flex
+    justify-content: space-between
+    z-index: 1000000
+    align-items: center
+
+.nav__menu-list
+    margin-bottom: 0px
+    list-style: none
+    display: flex
+    align-items: center
+
+    &:first-child
+        padding-left: $lateral-inner-header-padding
+        padding-right: $lateral-inner-header-padding
+
+    &:last-child
+        padding-right: $lateral-inner-header-padding
+        padding-left: $lateral-inner-header-padding
+
+.menu__item
+    padding: 0px
+
+    .icon
+        padding: 0px
+
+    &-link
+        padding: 0 15px
+
+        &:first-child
+            padding-left: $padding-left-menu-link-first-child
+    a
+        color: $color-header
+        text-decoration: none
+        padding-left: $padding-left-menu-link
+        padding-right: $padding-right-menu-link
+        padding-top: $padding-top-menu-link
+        padding-bottom: $padding-bottom-menu-link
+        font-weight: 600
+
+        &:first-child
+            padding-left: $padding-left-menu-link-first-child
+
+        &:after
+            content: none

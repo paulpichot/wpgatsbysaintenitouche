@@ -1,0 +1,39 @@
+@import "../variables.sass"
+
+header
+    width: 100%
+    z-index: 999999
+    position: initial
+
+.nav
+    position: relative
+    width: 100%
+    background-color: $bkg-color-header
+    margin-bottom: 0px
+
+.container--header
+    max-width: $width-header-container
+    display: flex
+    align-items: center
+    height: $mobile-height-header
+    position: relative
+    width: 100%
+
+@media only screen and (min-width: $mobile-width-breakpoint)
+
+    .nav
+        .container-header
+            display: flex
+            align-items: center
+            height: $height-header
+
+    .nav__logo, .nav__logo-container
+        width: $width-logo
+        height: $height-logo
+
+    .fixed-header
+        main
+            padding-top: $height-header
+
+    .nav__bar
+        margin-bottom: 50px
