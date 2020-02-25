@@ -1,5 +1,5 @@
 const config = {
-	wordPressUrl: `https://wpgraphql.saintenitouche.studio`
+	wordPressUrl: `https://graphql.paulpichot.com`
 };
 
 export default config;
