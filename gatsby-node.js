@@ -6,8 +6,8 @@ const createTags = require(`./gatsby/createTags`);
 
 exports.createPages = async ({ actions, graphql }) => {
 	const pluginOptions = {
-		wordPressUrl: `https://wpgraphql.saintenitouche.studio`,
-		uploadsUrl: `https://wpgraphql.saintenitouche.studio`
+		wordPressUrl: `http://wpgraphql.saintenitouche.studio`,
+		uploadsUrl: `http://wpgraphql.saintenitouche.studio`
 	};
 	await createPosts({ actions, graphql }, pluginOptions);
 	await createPages({ actions, graphql }, pluginOptions);

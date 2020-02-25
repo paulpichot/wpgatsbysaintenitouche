@@ -1,7 +1,7 @@
 module.exports = {
 	siteMetadata: {
-		title: `WP x Gatsby x Sainte Nitouche`,
-		description: `WP x Gatsby x Sainte Nitouche`,
+		title: `Wordpress x Gastby x Sainte Nitouche`,
+		description: `Wordpress x Gastby x Sainte Nitouche`,
 		author: `Paul Pichot`,
 		wordPressUrl: `/`,
 		siteLink: `/`
@@ -16,14 +16,14 @@ module.exports = {
 				// This is field under which it's accessible
 				fieldName: `wpgraphql`,
 				// Url to query from
-				url: `https://wpgraphql.saintenitouche.studio`
+				url: `http://www.wpgraphql.saintenitouche.studio/`
 			}
 		},
 		{
 			resolve: 'gatsby-wpgraphql-inline-images',
 			options: {
-				wordPressUrl: `https://wpgraphql.saintenitouche.studio`,
-				uploadsUrl: `https://wpgraphql.saintenitouche.studio`,
+				wordPressUrl: `http://www.wpgraphql.saintenitouche.studio/`,
+				uploadsUrl: `http://www.wpgraphql.saintenitouche.studio//wp-content/uploads/`,
 				processPostTypes: ['Page', 'Post'],
 				graphqlTypeName: `WPGraphQL`
 			}
