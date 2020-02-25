@@ -16,14 +16,14 @@ module.exports = {
 				// This is field under which it's accessible
 				fieldName: `wpgraphql`,
 				// Url to query from
-				url: `http://www.wpgraphql.saintenitouche.studio/`
+				url: `http://www.wpgraphql.saintenitouche.studio/graphql`
 			}
 		},
 		{
 			resolve: 'gatsby-wpgraphql-inline-images',
 			options: {
 				wordPressUrl: `http://www.wpgraphql.saintenitouche.studio/`,
-				uploadsUrl: `http://www.wpgraphql.saintenitouche.studio//wp-content/uploads/`,
+				uploadsUrl: `http://www.wpgraphql.saintenitouche.studio/wp-content/uploads/`,
 				processPostTypes: ['Page', 'Post'],
 				graphqlTypeName: `WPGraphQL`
 			}
